@@ -1,0 +1,56 @@
+local WhileLoopConveyor = Instance.new("ScreenGui")
+WhileLoopConveyor.ResetOnSpawn = false
+WhileLoopConveyor.IgnoreGuiInset = true
+local TextButton = Instance.new("TextButton")
+WhileLoopConveyor.Name = "WhileLoopConveyor"
+WhileLoopConveyor.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+WhileLoopConveyor.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+TextButton.Parent = WhileLoopConveyor
+TextButton.BackgroundColor3 = Color3.fromRGB(136, 255, 123)
+TextButton.BackgroundTransparency = 0.500
+TextButton.Position = UDim2.new(0, 0, 0.736940324, 0)
+TextButton.Size = UDim2.new(0, 200, 0, 50)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "activate"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextScaled = true
+TextButton.TextSize = 14.000
+TextButton.TextWrapped = true
+local function RDVD_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+	local activatetext = 'activate'
+	local unactivatetext = 'unactivate'
+	local canclick = true
+	local d = Instance.new('Part')
+	d.Size = Vector3.new(2,2,2)
+	d.Parent = game.Workspace
+	d.Anchored = true
+	d.Transparency = 1
+	local b = Instance.new('Part')
+	b.Transparency = 1
+	b.Parent = game.Workspace
+	b.CanCollide = false
+	b.Position = Vector3.new(0,0,0)
+	b.Anchored = true
+	local q = false
+	local s = game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+	script.Parent.MouseButton1Click:Connect(function()
+for i,v in pairs(game:GetService("Workspace").tower:GetDescendants()) do
+	if v:IsA("BoolValue") and v.Name == "kills" then
+		v.Parent:Destroy()
+	end
+end
+		if canclick == true then
+			canclick = false
+			repeat
+				wait()
+				s = game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+				s.CFrame = s.CFrame + Vector3.new(0,0.5,0)
+				d.CFrame = s.CFrame + Vector3.new(0,-1,0)
+			until s.Position.Y > game.Workspace.tower.height.Value
+			s.CFrame = game.Workspace.tower.sections.finish.FinishGlow.CFrame
+			canclick = true
+		end
+	end)
+end
+coroutine.wrap(RDVD_fake_script)()
